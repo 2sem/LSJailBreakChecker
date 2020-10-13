@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		2CDB54252535ED65000AD0EC /* LSJailBreakChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CDB54232535ED65000AD0EC /* LSJailBreakChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CDB54362535EE2B000AD0EC /* LSJailBreakChecker.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB54352535EE2B000AD0EC /* LSJailBreakChecker.podspec */; };
+		2CDB543B2535EE3F000AD0EC /* LSJailBreakChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB543A2535EE3F000AD0EC /* LSJailBreakChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2CDB54202535ED65000AD0EC /* LSJailBreakChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LSJailBreakChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDB54232535ED65000AD0EC /* LSJailBreakChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSJailBreakChecker.h; sourceTree = "<group>"; };
 		2CDB54242535ED65000AD0EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CDB54352535EE2B000AD0EC /* LSJailBreakChecker.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LSJailBreakChecker.podspec; sourceTree = "<group>"; };
+		2CDB543A2535EE3F000AD0EC /* LSJailBreakChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSJailBreakChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +34,7 @@
 		2CDB54162535ED65000AD0EC = {
 			isa = PBXGroup;
 			children = (
+				2CDB54352535EE2B000AD0EC /* LSJailBreakChecker.podspec */,
 				2CDB54222535ED65000AD0EC /* LSJailBreakChecker */,
 				2CDB54212535ED65000AD0EC /* Products */,
 			);
@@ -47,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				2CDB54232535ED65000AD0EC /* LSJailBreakChecker.h */,
+				2CDB543A2535EE3F000AD0EC /* LSJailBreakChecker.swift */,
 				2CDB54242535ED65000AD0EC /* Info.plist */,
 			);
 			path = LSJailBreakChecker;
@@ -94,6 +100,7 @@
 				TargetAttributes = {
 					2CDB541F2535ED65000AD0EC = {
 						CreatedOnToolsVersion = 12.0.1;
+						LastSwiftMigration = 1200;
 					};
 				};
 			};
@@ -120,6 +127,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CDB54362535EE2B000AD0EC /* LSJailBreakChecker.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CDB543B2535EE3F000AD0EC /* LSJailBreakChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +270,7 @@
 		2CDB54292535ED65000AD0EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = M29A6H95KD;
@@ -269,6 +279,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LSJailBreakChecker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -277,7 +288,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.leesam.LSJailBreakChecker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -285,6 +297,7 @@
 		2CDB542A2535ED65000AD0EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = M29A6H95KD;
@@ -293,6 +306,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LSJailBreakChecker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,7 +315,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.leesam.LSJailBreakChecker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
