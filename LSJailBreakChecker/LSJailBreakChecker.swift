@@ -72,7 +72,6 @@ public class LSJailBreakChecker{
         #if targetEnvironment(simulator)
         guard allowSimulator else{
             throw JailBreakError.simulator;
-            return;
         }
         #endif
         
