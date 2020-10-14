@@ -10,14 +10,18 @@
 		2CDB54252535ED65000AD0EC /* LSJailBreakChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CDB54232535ED65000AD0EC /* LSJailBreakChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CDB54362535EE2B000AD0EC /* LSJailBreakChecker.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB54352535EE2B000AD0EC /* LSJailBreakChecker.podspec */; };
 		2CDB543B2535EE3F000AD0EC /* LSJailBreakChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB543A2535EE3F000AD0EC /* LSJailBreakChecker.swift */; };
+		2CDB54452535F23D000AD0EC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB54432535F23D000AD0EC /* LICENSE */; };
+		2CDB54462535F23D000AD0EC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CDB54442535F23D000AD0EC /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2CDB54202535ED65000AD0EC /* LSJailBreakChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LSJailBreakChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDB54232535ED65000AD0EC /* LSJailBreakChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSJailBreakChecker.h; sourceTree = "<group>"; };
 		2CDB54242535ED65000AD0EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2CDB54352535EE2B000AD0EC /* LSJailBreakChecker.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LSJailBreakChecker.podspec; sourceTree = "<group>"; };
+		2CDB54352535EE2B000AD0EC /* LSJailBreakChecker.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LSJailBreakChecker.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2CDB543A2535EE3F000AD0EC /* LSJailBreakChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSJailBreakChecker.swift; sourceTree = "<group>"; };
+		2CDB54432535F23D000AD0EC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2CDB54442535F23D000AD0EC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +38,8 @@
 		2CDB54162535ED65000AD0EC = {
 			isa = PBXGroup;
 			children = (
+				2CDB54432535F23D000AD0EC /* LICENSE */,
+				2CDB54442535F23D000AD0EC /* README.md */,
 				2CDB54352535EE2B000AD0EC /* LSJailBreakChecker.podspec */,
 				2CDB54222535ED65000AD0EC /* LSJailBreakChecker */,
 				2CDB54212535ED65000AD0EC /* Products */,
@@ -127,6 +133,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CDB54462535F23D000AD0EC /* README.md in Resources */,
+				2CDB54452535F23D000AD0EC /* LICENSE in Resources */,
 				2CDB54362535EE2B000AD0EC /* LSJailBreakChecker.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
