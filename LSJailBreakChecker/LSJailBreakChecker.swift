@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import CryptoKit
+import CommonCrypto
 
 public class LSJailBreakChecker{
-    static let _breakerFiles = [
+    fileprivate static let _breakerFiles = [
                         "/Applications/Cydia.app",
                         "/var/cache/apt",
                         "/var/lib/apt/",
@@ -48,10 +50,10 @@ public class LSJailBreakChecker{
                         "/usr/libexec/sftp-server",
                         "/etc/apt"]
     
-    static let _breakerApps = [ // accesing other IOS applications is a sandbox violations
+    fileprivate static let _breakerApps = [ // accesing other IOS applications is a sandbox violations
         URL.init(string: "cydia://package/com.example.package")!]
     
-    static let _breakerLinks = [ // accesing other IOS applications is a sandbox violations
+    fileprivate static let _breakerLinks = [ // accesing other IOS applications is a sandbox violations
         "/Library/Ringtones",
         "/Library/Wallpaper",
         "/usr/arm-apple-darwin9",
@@ -66,53 +68,79 @@ public class LSJailBreakChecker{
         case app(package: URL)
         case link(path: String)
         case systemDirectory
+        case libraryBroken
     }
     
-    public static func check(allowSimulator: Bool = false, files: [String] = [], apps: [URL] = [], links: [String] = []) throws {
+    /// Check if the device is jail broken
+    /// - Parameters:
+    ///   - allowSimulator: Whether if allowed to launch app on simulator
+    ///   - files: extra file paths to check if the device is jail broken
+    ///   - apps: extra app url for jail breakers
+    ///   - links: extra app scheme for jail breakers
+    ///   - sum: Checksum to check if the LSJailBreakChecker's check list is broken
+    /// - Throws: Error for Jail Break Reason
+    /// - Returns: Check sum for LSJailBreakChecker's check list
+    public static func check(allowSimulator: Bool = false, files: [String] = [], apps: [URL] = [], links: [String] = [], sum: String = "") throws -> String {
         #if targetEnvironment(simulator)
         guard allowSimulator else{
             throw JailBreakError.simulator;
         }
         #endif
         
-        // Check 1 : existence of files that are common for jailbroken devices
-        let files = files + self._breakerFiles;
-        for path in files {
+        // Check if jail breaker files
+        let totalFiles = files + self._breakerFiles;
+        for path in totalFiles {
             if FileManager.default.fileExists(atPath: path) {
                 throw JailBreakError.file(path: path);
             }
         }
         
-        // Check 2: existence of applications that are common for jailbroken devices (if they are accesable then there is a sandbox violation wich means the device is jailbroken)
-        let apps = apps + self._breakerApps;
-        for app in apps {
+        // Check if jail breaker apps
+        let totalApps = apps + self._breakerApps;
+        for app in totalApps {
             if UIApplication.shared.canOpenURL(app) {
                 throw JailBreakError.app(package: app);
             }
         }
         
-        // Check 2: existence of applications that are common for jailbroken devices (if they are accesable then there is a sandbox violation wich means the device is jailbroken)
-        let links = (links + self._breakerLinks).compactMap{ URL.init(string: $0) };
-        for link in links {
+        // Check if jail breaker schemes
+        let totalLinks = (links + self._breakerLinks).compactMap{ URL.init(string: $0) };
+        for link in totalLinks {
             if self.isSymbolicLink(link) {
                 throw JailBreakError.link(path: link.path);
             }
         }
         
-        // Check 3 : Reading and writing in system directories (sandbox violation)
+        // Check if device is jail breaken
         let text = "Jailbreak Available"
+        let testFile = "/private/JailbreakTest.txt";
         do {
-            try text.write(toFile:"/private/JailbreakTest.txt", atomically:true, encoding:String.Encoding.utf8)
+            try text.write(toFile: testFile, atomically:true, encoding:String.Encoding.utf8)
             
             throw JailBreakError.systemDirectory
         } catch {
             //reasons["Read and write acces"] = false
         }
-//
-//        return reasons
+
+        // Check if LSJailBreakChecker is broken
+        let shadata = totalFiles + totalApps.map{ $0.absoluteString } + totalLinks.map{ $0.absoluteString } + [testFile];
+        do{
+            let sha = try self.sha256(shadata);
+            guard !sum.isEmpty else{
+                return sha;
+            }
+            
+            guard sha == sum else{
+                throw JailBreakError.libraryBroken;
+            }
+        }catch{
+            throw JailBreakError.libraryBroken;
+        }
+        
+        return "";
     }
     
-    static func isSymbolicLink(_ url: URL) -> Bool{
+    fileprivate static func isSymbolicLink(_ url: URL) -> Bool{
         if let reachable = try? url.checkResourceIsReachable(), reachable {
             let vals = try? url.resourceValues(forKeys: [.isSymbolicLinkKey]);
             if let islink = vals?.isSymbolicLink, islink {
@@ -124,5 +152,21 @@ public class LSJailBreakChecker{
         }
         
         return false;
+    }
+    
+    fileprivate static func sha256(_ strings: [String]) throws -> String{
+        let strsum = strings.reduce("", +);
+        let data = Data(strsum.data(using: .utf8)!);
+                
+        if #available(iOS 13.0, *) {
+            let hashed = SHA256.hash(data: data);
+            return hashed.compactMap { String(format: "%02x", $0) }.joined();
+        } else {
+            var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH));
+            data.withUnsafeBytes { bytes in
+                _ = CC_SHA256(bytes.baseAddress, UInt32(data.count), &digest)
+            }
+            return digest.makeIterator().compactMap { String(format: "%02x", $0) }.joined();
+        }
     }
 }

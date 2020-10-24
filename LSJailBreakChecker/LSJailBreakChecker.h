@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+//#import <CommonCrypto/CommonHMAC.h>
 
 //! Project version number for LSJailBreakChecker.
 FOUNDATION_EXPORT double LSJailBreakCheckerVersionNumber;

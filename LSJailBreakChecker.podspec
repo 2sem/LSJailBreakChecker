@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
   #
   s.name         = "LSJailBreakChecker"
-  s.version      = "1.0"
+  s.version      = "1.0.1"
   s.swift_version = "4.1"
   s.summary      = "Jail Break Checker for iOS."
 
